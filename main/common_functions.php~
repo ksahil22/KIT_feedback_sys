@@ -1,0 +1,76 @@
+<?php  
+//fetches the user"s row from the teachnonteach table
+//session_start();
+//require("config.php");
+/*$usn=$_SESSION["username"];
+
+
+
+$sql="SELECT * FROM teachnonteach WHERE username="$usn"";
+/*
+$sql = "SELECT privileges,status,firstname,father_name,lastname,mother_name,aicte_id,DTE_id,SU_id,permanent_addr,correspondence_addr,dateofbirth,religion,caste,PAN_no,Aadhar_no,landline_no,mobile,fax,email
+FROM teaching WHERE username="$usn"";
+
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    // output data of each row
+    $row = $result->fetch_assoc();
+i//echo "connected successfully";*/
+function dept_longform($dept_abbr)
+{
+if ($dept_abbr=="BIO") return "BIOTECHNOLOGY ENGG";
+if ($dept_abbr=="CIVIL") return "CIVIL ENGG";
+if ($dept_abbr=="CSE") return "COMPUTER SCIENCE & ENGG";
+if ($dept_abbr=="ELE") return "ELECTRICAL ENGG";
+if ($dept_abbr=="ELN") return "ELECTRONICS ENGG";
+if ($dept_abbr=="ENV") return "ENVIRONMENTAL ENGG";
+if ($dept_abbr=="ETC") return "ELECTRONICS & TELECOMM ENGG";
+if ($dept_abbr=="BSH") return "BASIC SCIENCES & HUMANITIES";
+if ($dept_abbr=="IT") return "INFORMATION TECHNOLOGY";
+if ($dept_abbr=="MECH") return "MECHANICAL ENGG";
+if ($dept_abbr=="PROD") return "PRODUCTION ENGG";
+return "KIT";
+}
+
+function to_ddmmyyyy($yyyymmdd)		{
+			if(strtotime($yyyymmdd))	{
+			if($yyyymmdd!='0000-00-00')	{
+				$exploded=explode('-',$yyyymmdd);
+			$s_day=$exploded[2];
+			$s_mon=$exploded[1];
+			$s_year=$exploded[0];
+
+			//$today=date('yyyy-mm-dd');
+
+			$ddmmyyyy=date(" d-m-Y ", mktime(0,0,0,$s_mon, $s_day, $s_year));
+			return $ddmmyyyy;
+			} else return '';
+			} else return $yyyymmdd;
+}
+function to_yyyymmdd($ddmmyyyy)		{
+		
+			if($ddmmyyyy!='00-00-0000')	{
+				$exploded=explode('-',$ddmmyyyy);
+			$s_day=$exploded[2];
+			$s_mon=$exploded[1];
+			$s_year=$exploded[0];
+
+			//$today=date('yyyy-mm-dd');
+			
+			$yyyymmdd=date("Y-m-d", mktime(0,0,0,$s_mon, $s_day, $s_year));
+			$yyyymmdd=date('Y-m-d',strtotime($ddmmyyyy));
+			return $yyyymmdd;
+			} else return '';
+}
+
+function leave_type($leave_from_db)	{
+
+			switch ($leave_from_db)	{
+				case 'cl':return 'Casual';break;
+				case 'compensation_l':return "CO";break;
+				case 'dl':return 'Duty';break;
+				default : return $leave_from_db;
+			}
+}
+?>
